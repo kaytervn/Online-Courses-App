@@ -65,6 +65,7 @@
         android:textSize="20dp"></Button>
 
     <TextView
+        android:id="@+id/textRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonLogin"

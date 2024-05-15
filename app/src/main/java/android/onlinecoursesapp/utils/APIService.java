@@ -14,6 +14,6 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface APIService {
-    @POST("users/login")
+    @POST("users/login-app-user")
     Call<ResponseBody> login(@Body User user);
 }
