@@ -6,10 +6,6 @@ android {
     namespace = "android.onlinecoursesapp"
     compileSdk = 34
 
-    buildFeatures {
-        viewBinding = true
-    }
-
     defaultConfig {
         applicationId = "android.onlinecoursesapp"
         minSdk = 21
