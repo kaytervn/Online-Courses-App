@@ -63,18 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideSoftKeyboard();
                 loginUser();
             }
         });
-    }
-
-    void hideSoftKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
     void loginUser() {
@@ -90,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
                         String token = jsonObject.get("token").getAsString();
                         String cartId = jsonObject.get("cartId").getAsString();
-                        SessionManager.getInstance(getApplicationContext()).saveLoginUser(token, cartId);
+                        SessionManager.getInstance(LoginActivity.this).saveLoginUser(token, cartId);
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                     } catch (IOException e) {
@@ -104,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -120,6 +111,6 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.inputPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
         textRegister = findViewById(R.id.textRegister);
-        token = SessionManager.getInstance(getApplicationContext()).getKeyToken();
+        token = SessionManager.getInstance(LoginActivity.this).getKeyToken();
     }
 }
