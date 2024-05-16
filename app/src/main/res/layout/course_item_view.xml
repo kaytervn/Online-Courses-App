@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:layout_marginHorizontal="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="match_parent"
-        android:layout_height="355dp"
+        android:layout_height="350dp"
         android:background="#00093A"
         app:shapeAppearanceOverlay="@style/car_border">
 
@@ -115,7 +116,7 @@
         android:shadowDy="5"
         android:shadowRadius="10"
         android:text="TOPIC"
-        android:textColor="#FFFFFF"
+        android:textColor="#00BCD4"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -129,26 +130,29 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/buttonViewIntro"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:backgroundTint="#3F51B5"
             android:text="View Intro"
+            android:textColor="@color/white"
             android:textSize="20dp"
-            app:cornerRadius="10dp"></com.google.android.material.button.MaterialButton>
+            app:cornerRadius="10dp"></Button>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <Button
             android:id="@+id/buttonAddToCart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:backgroundTint="#FFC107"
-            android:clickable="true"
-            android:contentDescription="Add to cart"
-            android:src="@drawable/cart_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+            android:drawableLeft="@drawable/cart_icon"
+            android:fontFamily="sans-serif-black"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
     </LinearLayout>
 
 </RelativeLayout>

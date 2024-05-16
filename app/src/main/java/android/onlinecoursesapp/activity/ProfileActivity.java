@@ -65,13 +65,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     void logout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
         builder.setTitle("Log out").setMessage("Confirm log out?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SessionManager.getInstance(getApplicationContext()).clearLoginUser();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        SessionManager.getInstance(ProfileActivity.this).clearLoginUser();
+                        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
