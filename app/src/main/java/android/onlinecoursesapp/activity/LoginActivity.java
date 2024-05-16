@@ -2,6 +2,7 @@ package android.onlinecoursesapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.onlinecoursesapp.model.User;
 import android.onlinecoursesapp.utils.APIService;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.onlinecoursesapp.R;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,9 +63,18 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideSoftKeyboard();
                 loginUser();
             }
         });
+    }
+
+    void hideSoftKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     void loginUser() {
