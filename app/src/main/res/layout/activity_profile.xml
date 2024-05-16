@@ -52,29 +52,29 @@
 
         <TableLayout
             android:id="@+id/p2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/p1"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="30dp"
-            android:stretchColumns="*"
-            android:shrinkColumns="*">
+            android:stretchColumns="*">
 
             <TableRow>
 
                 <TextView
                     android:layout_column="0"
                     android:padding="10dp"
-                    android:text="Name: "
+                    android:text="Name"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textName"
                     android:layout_column="1"
-                    android:padding="10dp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
                     android:text="text"
-                    android:textSize="15dp" />
+                    android:textSize="20dp" />
             </TableRow>
 
             <TableRow>
@@ -82,16 +82,17 @@
                 <TextView
                     android:layout_column="0"
                     android:padding="10dp"
-                    android:text="Role: "
+                    android:text="Role"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textRole"
                     android:layout_column="1"
-                    android:padding="10dp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
                     android:text="text"
-                    android:textSize="15dp" />
+                    android:textSize="20dp" />
             </TableRow>
 
             <TableRow>
@@ -99,16 +100,17 @@
                 <TextView
                     android:layout_column="0"
                     android:padding="10dp"
-                    android:text="Email: "
+                    android:text="Email"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textEmail"
                     android:layout_column="1"
-                    android:padding="10dp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
                     android:text="text"
-                    android:textSize="15dp" />
+                    android:textSize="20dp" />
             </TableRow>
         </TableLayout>
 
@@ -124,6 +126,7 @@
             android:textSize="20dp"></Button>
 
         <TextView
+            android:id="@+id/textLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonChangePassword"

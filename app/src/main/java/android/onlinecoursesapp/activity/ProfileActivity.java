@@ -2,6 +2,8 @@ package android.onlinecoursesapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -31,7 +33,7 @@ import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
     Button buttonHome, buttonMyCourses, buttonCart, buttonProfile;
-    TextView textName, textEmail, textRole;
+    TextView textName, textEmail, textRole, textLogout;
     ImageView imagePicture;
     APIService apiService;
     FloatingActionButton buttonUpload;
@@ -54,6 +56,29 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        textLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+    }
+
+    void logout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Log out").setMessage("Confirm log out?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SessionManager.getInstance(getApplicationContext()).clearLoginUser();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                }).show();
     }
 
     void mapping() {
@@ -66,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
         textEmail = findViewById(R.id.textEmail);
         textRole = findViewById(R.id.textRole);
         buttonUpload = findViewById(R.id.buttonUpload);
+        textLogout = findViewById(R.id.textLogout);
     }
 
     void getUser() {
