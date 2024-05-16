@@ -57,6 +57,7 @@
             android:layout_below="@+id/p1"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="30dp"
+            android:stretchColumns="*"
             android:shrinkColumns="*">
 
             <TableRow>
@@ -65,7 +66,7 @@
                     android:layout_column="0"
                     android:padding="10dp"
                     android:text="Name: "
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -73,7 +74,7 @@
                     android:layout_column="1"
                     android:padding="10dp"
                     android:text="text"
-                    android:textSize="25dp" />
+                    android:textSize="15dp" />
             </TableRow>
 
             <TableRow>
@@ -82,7 +83,7 @@
                     android:layout_column="0"
                     android:padding="10dp"
                     android:text="Role: "
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -90,7 +91,7 @@
                     android:layout_column="1"
                     android:padding="10dp"
                     android:text="text"
-                    android:textSize="25dp" />
+                    android:textSize="15dp" />
             </TableRow>
 
             <TableRow>
@@ -99,14 +100,15 @@
                     android:layout_column="0"
                     android:padding="10dp"
                     android:text="Email: "
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textEmail"
                     android:layout_column="1"
                     android:padding="10dp"
                     android:text="text"
-                    android:textSize="25dp" />
+                    android:textSize="15dp" />
             </TableRow>
         </TableLayout>
 
