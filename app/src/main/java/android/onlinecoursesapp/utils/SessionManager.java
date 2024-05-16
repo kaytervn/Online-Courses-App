@@ -33,7 +33,7 @@ public class SessionManager {
         return sharedPreferences.getString(KEY_TOKEN, "");
     }
 
-    public String getKeyCart() {
+    public String getKeyCartId() {
         return sharedPreferences.getString(KEY_CART_ID, "");
     }
 
