@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.onlinecoursesapp.adapter.MyCourseAdapter;
 import android.onlinecoursesapp.model.Course;
 import android.onlinecoursesapp.model.MyCourse;
+import android.onlinecoursesapp.model.Review;
 import android.onlinecoursesapp.model.ReviewData;
+import android.onlinecoursesapp.model.ReviewResult;
 import android.onlinecoursesapp.utils.APIService;
 import android.onlinecoursesapp.utils.RetrofitClient;
 import android.os.Bundle;
@@ -25,10 +27,6 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONStringer;
-
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -43,7 +41,7 @@ public class ReviewCourseActivity extends AppCompatActivity {
     RatingBar starReview;
     EditText contentReview;
     Button btn_send, btn_back;
-    ReviewData review_data;
+    Review review;
     String token;
     Course course;
     APIService apiService;
@@ -68,10 +66,10 @@ public class ReviewCourseActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                review_data = new ReviewData(starReview.getNumStars(), contentReview.getText().toString());
+                review = new Review((int)starReview.getRating(), contentReview.getText().toString());
                 sendReview();
                 finish();
-                Intent intent = new Intent(ReviewCourseActivity.this, ReviewCourseActivity.class);
+                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,41 +81,69 @@ public class ReviewCourseActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(course.getPicture())
                 .into(imgCourse);
         apiService = RetrofitClient.getAPIService();
-        apiService.getMyReviewForCourse("Bearer "+token, course.get_id()).enqueue(new Callback<ResponseBody>() {
+        apiService.getMyReviewForCourse("Bearer "+token, course.get_id()).enqueue(new Callback<Review>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Review> call, Response<Review> response) {
                 if(response.isSuccessful()){
-                    String jsonString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    String review_id = jsonObject.getString("_id");
-
-                    if (review_id.isEmpty()) {
-                        btn_send.setEnabled(true);
-                    } else {
+                    review = response.body();
+                    if(!review.get_id().isEmpty()){
                         btn_send.setEnabled(false);
+                        starReview.setRating(review.getRatingStar());
+                        starReview.setEnabled(false);
+                        contentReview.setText(review.getContent());
+                        contentReview.setEnabled(false);
                     }
                 }else{
                     String errorMessage = "";
                     try {
                         JsonObject errorJson = new Gson().fromJson(response.errorBody().string(), JsonObject.class);
-                        errorMessage = errorJson.get("error").getAsString();
+                        errorMessage = errorJson.get("message").getAsString();
+                        if(errorMessage.equals("Review not found for this course.")){
+                            btn_send.setEnabled(true);
+                            starReview.setEnabled(true);
+                            contentReview.setEnabled(true);
+                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
 //                    int statusCode = response.code();
 //                    Log.d("logg", String.valueOf(statusCode));
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+            public void onFailure(Call<Review> call, Throwable t) {
+                Log.d("logg", t.getMessage());
             }
         });
     }
     private void sendReview(){
+        ReviewData review_data = new ReviewData(course.get_id(), review);
+        apiService.createReview("Bearer "+token, course.get_id(), review_data).enqueue(new Callback<ReviewResult>() {
+            @Override
+            public void onResponse(Call<ReviewResult> call, Response<ReviewResult> response) {
+                if(response.isSuccessful()){
+                    ReviewResult result = response.body();
+                    Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                }else{
+                    String errorMessage = "";
+                    try {
+                        JsonObject errorJson = new Gson().fromJson(response.errorBody().string(), JsonObject.class);
+                        errorMessage = errorJson.get("message").getAsString();
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+//                    int statusCode = response.code();
+//                    Log.d("logg", String.valueOf(statusCode));
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ReviewResult> call, Throwable t) {
+
+            }
+        });
     }
     private void mapping(){
         tvCourseName = (TextView) findViewById(R.id.txtCourseName);

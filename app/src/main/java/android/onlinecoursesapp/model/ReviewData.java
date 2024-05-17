@@ -5,29 +5,29 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class ReviewData implements Serializable {
-    @SerializedName("ratingStar")
-    private int ratingStar;
-    @SerializedName("content")
-    private String content;
+    @SerializedName("courseId")
+    private String courseId;
+    @SerializedName("reviewData")
+    private Review reviewData;
 
-    public ReviewData(int ratingStar, String content) {
-        this.ratingStar = ratingStar;
-        this.content = content;
+    public ReviewData(String courseId, Review reviewData) {
+        this.courseId = courseId;
+        this.reviewData = reviewData;
     }
 
-    public int getRatingStar() {
-        return ratingStar;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setRatingStar(int ratingStar) {
-        this.ratingStar = ratingStar;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
-    public String getContent() {
-        return content;
+    public Review getReviewData() {
+        return reviewData;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setReviewData(Review reviewData) {
+        this.reviewData = reviewData;
     }
 }

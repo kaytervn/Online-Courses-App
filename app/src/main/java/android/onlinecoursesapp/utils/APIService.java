@@ -1,7 +1,9 @@
 package android.onlinecoursesapp.utils;
 
 import android.onlinecoursesapp.model.MyCourse;
+import android.onlinecoursesapp.model.Review;
 import android.onlinecoursesapp.model.ReviewData;
+import android.onlinecoursesapp.model.ReviewResult;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -15,7 +17,7 @@ public interface APIService {
     @GET("invoices/my_course")
     Call<MyCourse> getMyCourses(@Header("Authorization") String token);
     @GET("reviews/get-my-review-for-course/{courseId}")
-    Call<ResponseBody> getMyReviewForCourse(@Header("Authorization") String token, @Path("courseId") String courseId);
+    Call<Review> getMyReviewForCourse(@Header("Authorization") String token, @Path("courseId") String courseId);
     @POST("reviews/create_review/{courseId}")
-    Call<ResponseBody> createReview(@Header("Authorization") String token, @Path("courseId") String temp,@Body String courseId, @Body ReviewData reviewData);
+    Call<ReviewResult> createReview(@Header("Authorization") String token, @Path("courseId") String temp, @Body ReviewData reviewData);
 }
