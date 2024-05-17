@@ -72,6 +72,13 @@ public class ProfileActivity extends AppCompatActivity {
                 ImagePicker.Companion.with(ProfileActivity.this).crop().compress(512).maxResultSize(200, 200).start();
             }
         });
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
         textLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

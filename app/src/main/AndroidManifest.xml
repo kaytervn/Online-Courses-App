@@ -34,6 +34,9 @@
             android:name=".activity.ChangePasswordActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.CheckOutActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity

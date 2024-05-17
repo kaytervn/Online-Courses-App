@@ -24,12 +24,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }

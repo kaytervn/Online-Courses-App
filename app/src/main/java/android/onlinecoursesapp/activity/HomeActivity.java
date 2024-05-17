@@ -199,6 +199,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setEvent() {
         buttonHome.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E91E63")));
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
         buttonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

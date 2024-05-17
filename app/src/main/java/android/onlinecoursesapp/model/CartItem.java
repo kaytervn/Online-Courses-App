@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.SerializedName;
 
 public class CartItem {
-    @SerializedName("id")
+    @SerializedName("_id")
     String id;
 
     @SerializedName("cartId")
