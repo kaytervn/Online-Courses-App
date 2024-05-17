@@ -40,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
-    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile;
+    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile, buttonChangeName, buttonChangePassword;
     TextView textName, textEmail, textRole, textLogout;
     ImageView imagePicture;
     APIService apiService;
@@ -63,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         buttonUpload.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,22 @@ public class ProfileActivity extends AppCompatActivity {
                 logout();
             }
         });
+        buttonChangeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ChangeNameActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        buttonChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ChangePasswordActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     void logout() {
@@ -88,6 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
                         SessionManager.getInstance(ProfileActivity.this).clearLoginUser();
                         Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -107,6 +125,8 @@ public class ProfileActivity extends AppCompatActivity {
         textRole = findViewById(R.id.textRole);
         buttonUpload = findViewById(R.id.buttonUpload);
         textLogout = findViewById(R.id.textLogout);
+        buttonChangeName = findViewById(R.id.buttonChangeName);
+        buttonChangePassword = findViewById(R.id.buttonChangePassword);
     }
 
     void getUser() {
@@ -114,6 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (token == "") {
             Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         } else {
             apiService = RetrofitClient.getAPIService();
             Call<ResponseBody> call = apiService.getUser("Bearer " + token);

@@ -29,6 +29,10 @@ public class User {
         this.password = password;
     }
 
+    public User(String name) {
+        this.name = name;
+    }
+
     public User(String name, String email, String password, String confirmPassword) {
         this.name = name;
         this.email = email;
@@ -79,5 +83,46 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public class ChangePassword {
+        @SerializedName("password")
+        String password;
+
+        @SerializedName("newPassword")
+        String newPassword;
+
+        @SerializedName("confirmPassword")
+        String confirmPassword;
+
+        public ChangePassword(String password, String newPassword, String confirmPassword) {
+            this.password = password;
+            this.newPassword = newPassword;
+            this.confirmPassword = confirmPassword;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getNewPassword() {
+            return newPassword;
+        }
+
+        public void setNewPassword(String newPassword) {
+            this.newPassword = newPassword;
+        }
+
+        public String getConfirmPassword() {
+            return confirmPassword;
+        }
+
+        public void setConfirmPassword(String confirmPassword) {
+            this.confirmPassword = confirmPassword;
+        }
     }
 }

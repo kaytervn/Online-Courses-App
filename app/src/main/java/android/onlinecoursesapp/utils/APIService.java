@@ -22,6 +22,12 @@ public interface APIService {
     @POST("users/register-app-user")
     Call<ResponseBody> register(@Body User user);
 
+    @PUT("users/change-app-user-name")
+    Call<ResponseBody> changeUserName(@Header("Authorization") String token, @Body User user);
+
+    @PUT("users/change-password-app-user")
+    Call<ResponseBody> changeUserPassword(@Header("Authorization") String token, @Body User.ChangePassword user);
+
     @GET("carts/getCart")
     Call<ResponseBody> getCart(@Header("Authorization") String authorization);
 
