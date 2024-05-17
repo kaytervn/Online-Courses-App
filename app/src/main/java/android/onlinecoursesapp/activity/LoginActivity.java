@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         if (token != "") {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -83,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         SessionManager.getInstance(LoginActivity.this).saveLoginUser(token, cartId);
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
+                        finish();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -28,6 +28,12 @@
             android:name=".activity.CourseIntroActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.ChangeNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity

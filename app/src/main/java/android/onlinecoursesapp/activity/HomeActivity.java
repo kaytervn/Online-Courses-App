@@ -204,6 +204,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -275,6 +276,7 @@ public class HomeActivity extends AppCompatActivity {
         if (token == "") {
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         } else {
             apiService = RetrofitClient.getAPIService();
             Call<ResponseBody> call = apiService.getUser("Bearer " + token);
