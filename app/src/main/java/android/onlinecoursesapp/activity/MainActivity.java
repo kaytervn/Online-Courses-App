@@ -14,7 +14,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button buttonIntro = findViewById(R.id.buttonIntro);
+        Button buttonCart = findViewById(R.id.buttonCart);
         Button btn_MyCourse = (Button) findViewById(R.id.btn_MyCourse);
+        buttonIntro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btn_MyCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

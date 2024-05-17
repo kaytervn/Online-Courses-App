@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <Button
+<Button
         android:id="@+id/btn_MyCourse"
         android:layout_width="195dp"
         android:layout_height="52dp"
@@ -16,4 +16,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.449" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+
+        android:id="@+id/buttonIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Intro"></Button>
+
+    <Button
+        android:id="@+id/buttonCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonIntro"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginEnd="158dp"
+        android:layout_marginBottom="524dp"
+        android:text="Cart" />
+</RelativeLayout>

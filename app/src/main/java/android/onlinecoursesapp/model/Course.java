@@ -2,45 +2,56 @@ package android.onlinecoursesapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.util.Date;
-
-public class Course implements Serializable {
+public class Course {
     @SerializedName("_id")
-    private String _id;
-    @SerializedName("userId")
-    private String userId;
-    @SerializedName("cloudinary")
-    private String cloudinary;
-    @SerializedName("topic")
-    private String topic;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("picture")
-    private String picture;
-    @SerializedName("description")
-    private String description;
-    @SerializedName("price")
-    private float price;
-    @SerializedName("createAt")
-    private Date createAt;
-    @SerializedName("updatedAt")
-    private Date updatedAt;
-    @SerializedName("visibility")
-    private boolean visibility;
-    @SerializedName("status")
-    private boolean status;
-    @SerializedName("__v")
-    private int __v;
+    private String id;
+
     @SerializedName("instructorName")
     private String instructorName;
 
-    public String get_id() {
-        return _id;
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("topic")
+    private String topic;
+
+    @SerializedName("picture")
+    private String picture;
+
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("createdAt")
+    private String createdAt;
+
+    @SerializedName("price")
+    private float price;
+
+    public Course(String id, String instructorName, String title, String topic, String picture, String description, String createdAt, float price) {
+        this.id = id;
+        this.instructorName = instructorName;
+        this.title = title;
+        this.topic = topic;
+        this.picture = picture;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.price = price;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getInstructorName() {
+        return instructorName;
+    }
+
+    public void setInstructorName(String instructorName) {
+        this.instructorName = instructorName;
     }
 
     public String getTitle() {
@@ -49,6 +60,14 @@ public class Course implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getPicture() {
@@ -67,6 +86,14 @@ public class Course implements Serializable {
         this.description = description;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -75,43 +102,25 @@ public class Course implements Serializable {
         this.price = price;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public static class SearchCourses {
+        @SerializedName("keyword")
+        String searchValue;
+        @SerializedName("topic")
+        String selectedTopic;
+        @SerializedName("sort")
+        String selectedSort;
+        @SerializedName("page")
+        int currentPage;
+
+        public SearchCourses(String searchValue, String selectedTopic, String selectedSort, int currentPage) {
+            this.searchValue = searchValue;
+            this.selectedTopic = selectedTopic;
+            this.selectedSort = selectedSort;
+            this.currentPage = currentPage;
+        }
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    public boolean isVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(boolean visibility) {
-        this.visibility = visibility;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int get__v() {
-        return __v;
-    }
-
-    public void set__v(int __v) {
-        this.__v = __v;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
 }
+
+
+
