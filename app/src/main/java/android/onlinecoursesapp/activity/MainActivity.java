@@ -14,10 +14,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button buttonIntro = findViewById(R.id.buttonIntro);
+        Button buttonCart = findViewById(R.id.buttonCart);
         buttonIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });

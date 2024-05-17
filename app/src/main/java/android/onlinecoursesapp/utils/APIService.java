@@ -22,6 +22,9 @@ public interface APIService {
     @POST("users/register-app-user")
     Call<ResponseBody> register(@Body User user);
 
+    @GET("carts/getCart")
+    Call<ResponseBody> getCart(@Header("Authorization") String authorization);
+
     @GET("users/")
     Call<ResponseBody> getUser(@Header("Authorization") String authorization);
 
