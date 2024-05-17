@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/p1"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:stretchColumns="*">
 
             <TableRow>
@@ -115,12 +115,23 @@
         </TableLayout>
 
         <Button
-            android:id="@+id/buttonChangePassword"
-            android:layout_width="wrap_content"
+            android:id="@+id/buttonChangeName"
+            android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_below="@id/p2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#009688"
+            android:text="Change Name"
+            android:textSize="20dp"></Button>
+
+        <Button
+            android:id="@+id/buttonChangePassword"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/buttonChangeName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:backgroundTint="#040404"
             android:text="Change Password"
             android:textSize="20dp"></Button>

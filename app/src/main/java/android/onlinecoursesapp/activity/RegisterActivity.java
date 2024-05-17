@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                         SessionManager.getInstance(RegisterActivity.this).saveLoginUser(token, cartId);
                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                         startActivity(intent);
+                        finish();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
