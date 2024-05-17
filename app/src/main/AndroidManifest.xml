@@ -27,6 +27,9 @@
             android:name=".activity.CartActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.HomeActivity"
             android:exported="false" />
         <activity
