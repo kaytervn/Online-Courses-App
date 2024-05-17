@@ -35,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReviewCourseActivity extends AppCompatActivity {
-
+    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile;
     TextView tvCourseName;
     ImageView imgCourse;
     RatingBar starReview;
@@ -55,25 +55,7 @@ public class ReviewCourseActivity extends AppCompatActivity {
         course = (Course) intent.getSerializableExtra("course");
         mapping();
         setView();
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
-                startActivity(intent);
-            }
-        });
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                review = new Review((int)starReview.getRating(), contentReview.getText().toString());
-                sendReview();
-                finish();
-                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        setEvent();
     }
 
     private void setView(){
@@ -117,6 +99,26 @@ public class ReviewCourseActivity extends AppCompatActivity {
             }
         });
     }
+    private void setEvent(){
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                review = new Review((int)starReview.getRating(), contentReview.getText().toString());
+                sendReview();
+                finish();
+                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
     private void sendReview(){
         ReviewData review_data = new ReviewData(course.getId(), review);
         apiService.createReview("Bearer "+token, course.getId(), review_data).enqueue(new Callback<ReviewResult>() {
@@ -141,7 +143,7 @@ public class ReviewCourseActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ReviewResult> call, Throwable t) {
-
+                Log.d("logg", t.getMessage());
             }
         });
     }
@@ -152,5 +154,10 @@ public class ReviewCourseActivity extends AppCompatActivity {
         contentReview = (EditText) findViewById(R.id.editTextContentReview);
         btn_send = (Button) findViewById(R.id.btn_sent_review);
         btn_back = (Button) findViewById(R.id.btn_back);
+
+        buttonHome = findViewById(R.id.buttonHome);
+        buttonMyCourses = findViewById(R.id.buttonMyCourses);
+        buttonCart = findViewById(R.id.buttonCart);
+        buttonProfile = findViewById(R.id.buttonProfile);
     }
 }

@@ -14,6 +14,7 @@ import android.onlinecoursesapp.utils.RetrofitClient;
 import android.os.Bundle;
 import android.onlinecoursesapp.R;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyCourseActivity extends AppCompatActivity {
+    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile;
 
     RecyclerView rc_my_course;
     APIService apiService;
@@ -39,10 +41,18 @@ public class MyCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_course);
         mapping();
+        setEvent();
         GetMyCourse();
+    }
+    private void setEvent(){
+
     }
     private void mapping(){
         rc_my_course = (RecyclerView) findViewById(R.id.rv_my_course);
+        buttonHome = findViewById(R.id.buttonHome);
+        buttonMyCourses = findViewById(R.id.buttonMyCourses);
+        buttonCart = findViewById(R.id.buttonCart);
+        buttonProfile = findViewById(R.id.buttonProfile);
     }
     private void GetMyCourse(){
         apiService = RetrofitClient.getAPIService();

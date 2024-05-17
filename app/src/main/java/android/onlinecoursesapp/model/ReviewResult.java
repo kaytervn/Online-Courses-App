@@ -8,7 +8,7 @@ public class ReviewResult implements Serializable {
     @SerializedName("message")
     private String message;
     @SerializedName("review")
-    private String review;
+    private Review review;
 
     public String getMessage() {
         return message;
@@ -18,11 +18,11 @@ public class ReviewResult implements Serializable {
         this.message = message;
     }
 
-    public String getReview() {
+    public Review getReview() {
         return review;
     }
 
-    public void setReview(String review) {
+    public void setReview(Review review) {
         this.review = review;
     }
 }
