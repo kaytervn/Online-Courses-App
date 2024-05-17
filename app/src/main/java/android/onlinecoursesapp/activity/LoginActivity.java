@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputPassword;
     TextView textRegister;
     Button buttonLogin;
-
     APIService apiService;
     String token;
 

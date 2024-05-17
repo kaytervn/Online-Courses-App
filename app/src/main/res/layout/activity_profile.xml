@@ -33,7 +33,7 @@
                 android:layout_height="200dp"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/user"
                 app:shapeAppearanceOverlay="@style/circular"
                 app:strokeColor="#673AB7"
                 app:strokeWidth="5dp" />
