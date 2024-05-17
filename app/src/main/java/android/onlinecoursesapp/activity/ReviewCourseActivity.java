@@ -81,7 +81,7 @@ public class ReviewCourseActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(course.getPicture())
                 .into(imgCourse);
         apiService = RetrofitClient.getAPIService();
-        apiService.getMyReviewForCourse("Bearer "+token, course.get_id()).enqueue(new Callback<Review>() {
+        apiService.getMyReviewForCourse("Bearer "+token, course.getId()).enqueue(new Callback<Review>() {
             @Override
             public void onResponse(Call<Review> call, Response<Review> response) {
                 if(response.isSuccessful()){
@@ -118,8 +118,8 @@ public class ReviewCourseActivity extends AppCompatActivity {
         });
     }
     private void sendReview(){
-        ReviewData review_data = new ReviewData(course.get_id(), review);
-        apiService.createReview("Bearer "+token, course.get_id(), review_data).enqueue(new Callback<ReviewResult>() {
+        ReviewData review_data = new ReviewData(course.getId(), review);
+        apiService.createReview("Bearer "+token, course.getId(), review_data).enqueue(new Callback<ReviewResult>() {
             @Override
             public void onResponse(Call<ReviewResult> call, Response<ReviewResult> response) {
                 if(response.isSuccessful()){

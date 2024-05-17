@@ -54,4 +54,4 @@ public interface APIService {
     @POST("reviews/create_review/{courseId}")
     Call<ReviewResult> createReview(@Header("Authorization") String token, @Path("courseId") String temp, @Body ReviewData reviewData);
 }
-}
+
