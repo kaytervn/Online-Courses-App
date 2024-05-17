@@ -40,8 +40,8 @@ public class CartActivity extends AppCompatActivity {
     private CartItemsAdapter cartItemsAdapter;
     private List<Course> courses = new ArrayList<>();
     private int expectedCourses = 0;
-    private TextView emptyCartTextView, totalCartTxt;
-    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile;
+    private TextView emptyCartTextView, totalCartTxt ;
+    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile ;
 
 
     @Override
@@ -157,6 +157,14 @@ public class CartActivity extends AppCompatActivity {
         buttonProfile = findViewById(R.id.buttonProfile);
         emptyCartTextView = findViewById(R.id.emptyCartTextView);
         totalCartTxt = findViewById(R.id.totalCartTxt);
+        TextView checkoutCartTxt = findViewById(R.id.checkoutCartTxt);
+        checkoutCartTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToCheckOut();
+            }
+        });
+        updateCheckoutButtonState();
     }
     public void updateTotalCost() {
         double totalCost = 0;
@@ -165,5 +173,38 @@ public class CartActivity extends AppCompatActivity {
         }
         String formattedTotalCost = String.format("%.2f$", totalCost);
         totalCartTxt.setText(formattedTotalCost);
+        updateCheckoutButtonState();
     }
+    private void updateCheckoutButtonState() {
+        TextView checkoutCartTxt = findViewById(R.id.checkoutCartTxt);
+        if (courses.isEmpty()) {
+            checkoutCartTxt.setEnabled(false);
+            checkoutCartTxt.setTextColor(Color.GRAY); // Đặt màu chữ thành màu xám để chỉ ra rằng nút bị vô hiệu
+        } else {
+            checkoutCartTxt.setEnabled(true);
+            checkoutCartTxt.setTextColor(Color.BLACK); // Đặt màu chữ thành màu đen khi nút có thể nhấn
+        }
+    }
+    private void goToCheckOut() {
+        Intent intent = new Intent(CartActivity.this, CheckOutActivity.class);
+        intent.putExtra("TotalCost", totalCartTxt.getText().toString());
+
+        ArrayList<String> courseTitles = new ArrayList<>();
+        ArrayList<String> coursePrices = new ArrayList<>();
+        ArrayList<String> courseImages = new ArrayList<>(); // Danh sách để lưu trữ URL hình ảnh của mỗi khóa học
+
+        for (Course course : courses) {
+            courseTitles.add(course.getTitle());
+            coursePrices.add(String.valueOf(course.getPrice()));
+            courseImages.add(course.getPicture()); // Lấy URL hình ảnh từ mỗi khóa học
+        }
+
+        intent.putStringArrayListExtra("CourseTitles", courseTitles);
+        intent.putStringArrayListExtra("CoursePrices", coursePrices);
+        intent.putStringArrayListExtra("CourseImages", courseImages); // Thêm danh sách URL hình ảnh vào intent
+
+        startActivity(intent);
+    }
+
+
 }
