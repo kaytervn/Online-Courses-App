@@ -28,6 +28,8 @@ public interface APIService {
     @GET("users/")
     Call<ResponseBody> getUser(@Header("Authorization") String authorization);
 
+    @GET("courses/get_course/{id}")
+    Call<ResponseBody> getCourseIntro(@Path("id") String id);
     @POST("courses/search-courses")
     Call<ResponseBody> searchCourses(@Body Course.SearchCourses searchCourses);
 

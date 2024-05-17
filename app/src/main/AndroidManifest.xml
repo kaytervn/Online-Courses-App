@@ -21,9 +21,12 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/cookiedu_logo"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.OnlineCoursesApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.CourseIntroActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.CartActivity"
             android:exported="false" />

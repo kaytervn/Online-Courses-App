@@ -84,7 +84,10 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onViewIntroClick(Course course) {
-
+                Intent intent = new Intent(HomeActivity.this, CourseIntroActivity.class);
+                intent.putExtra("course_id", course.getId());
+                startActivity(intent);
+                finish();
             }
 
             @Override
