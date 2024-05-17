@@ -1,5 +1,6 @@
 package android.onlinecoursesapp.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -7,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.onlinecoursesapp.utils.APIService;
+import android.onlinecoursesapp.utils.RealPathUtil;
 import android.onlinecoursesapp.utils.RetrofitClient;
 import android.onlinecoursesapp.utils.SessionManager;
 import android.os.Bundle;
@@ -20,12 +23,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.io.File;
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imagePicture;
     APIService apiService;
     FloatingActionButton buttonUpload;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,12 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
                 startActivity(intent);
+            }
+        });
+        buttonUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.Companion.with(ProfileActivity.this).crop().compress(512).maxResultSize(200, 200).start();
             }
         });
         textLogout.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     void getUser() {
-        String token = SessionManager.getInstance(ProfileActivity.this).getKeyToken();
+        token = SessionManager.getInstance(ProfileActivity.this).getKeyToken();
         if (token == "") {
             Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -129,6 +144,66 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.d("Failed to call API", t.getMessage());
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            if (uri != null) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                builder.setTitle("Update Profile Picture");
+                builder.setMessage("Confirm update?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imagePicture.setImageURI(uri);
+                        String realPath = RealPathUtil.getRealPath(ProfileActivity.this, uri);
+                        File file = new File(realPath);
+
+                        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
+
+                        apiService = RetrofitClient.getAPIService();
+                        Call<ResponseBody> call = apiService.updateUserProfilePicture("Bearer " + token, imagePart);
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(ProfileActivity.this, "Update profile picture successfully!", Toast.LENGTH_SHORT).show();
+                                    imagePicture.setImageURI(uri);
+                                } else {
+                                    String errorMessage = "";
+                                    try {
+                                        JsonObject errorJson = new Gson().fromJson(response.errorBody().string(), JsonObject.class);
+                                        errorMessage = errorJson.get("error").getAsString();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    Toast.makeText(ProfileActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.d("Failed to call API", t.getMessage());
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
         }
     }
 }

@@ -18,12 +18,22 @@ public class User {
     @SerializedName("password")
     String password;
 
+    @SerializedName("confirmPassword")
+    String confirmPassword;
+
     public User(String id, String picture, String name, String email, String password) {
         this.id = id;
         this.picture = picture;
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String name, String email, String password, String confirmPassword) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
     }
 
     public User(String email, String password) {
