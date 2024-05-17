@@ -2,8 +2,10 @@ package android.onlinecoursesapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Course {
-    @SerializedName("id")
+    @SerializedName("_id")
     String id;
 
     @SerializedName("instructorName")
@@ -35,6 +37,15 @@ public class Course {
         this.picture = picture;
         this.description = description;
         this.createdAt = createdAt;
+        this.price = price;
+    }
+
+    public Course(String id, String instructorName, String title, String topic, String picture, float price) {
+        this.id = id;
+        this.instructorName = instructorName;
+        this.title = title;
+        this.topic = topic;
+        this.picture = picture;
         this.price = price;
     }
 
@@ -119,6 +130,112 @@ public class Course {
             this.currentPage = currentPage;
         }
     }
+    public class Review {
+        @SerializedName("_id")
+        String id;
+        @SerializedName("userId")
+        String userId;
+        @SerializedName("courseId")
+        String courseId;
+        @SerializedName("ratingStar")
+        int ratingStar;
+        @SerializedName("content")
+        String content;
+        @SerializedName("userName")
+        String userName;
+        @SerializedName("userPicture")
+        String userPicture;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getCourseId() {
+            return courseId;
+        }
+
+        public void setCourseId(String courseId) {
+            this.courseId = courseId;
+        }
+
+        public int getRatingStar() {
+            return ratingStar;
+        }
+
+        public void setRatingStar(int ratingStar) {
+            this.ratingStar = ratingStar;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public String getUserPicture() {
+            return userPicture;
+        }
+
+        public void setUserPicture(String userPicture) {
+            this.userPicture = userPicture;
+        }
+    }
+
+    public class CourseDetailsResponse {
+        @SerializedName("course")
+        Course course;
+        @SerializedName("reviews")
+        List<Review> reviews;
+        @SerializedName("averageStars")
+        float averageStars;
+
+        public Course getCourse() {
+            return course;
+        }
+
+        public void setCourse(Course course) {
+            this.course = course;
+        }
+
+        public List<Review> getReviews() {
+            return reviews;
+        }
+
+        public void setReviews(List<Review> reviews) {
+            this.reviews = reviews;
+        }
+
+        public float getAverageStars() {
+            return averageStars;
+        }
+
+        public void setAverageStars(float averageStars) {
+            this.averageStars = averageStars;
+        }
+    }
+
 
 }
 
