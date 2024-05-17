@@ -90,9 +90,6 @@ public class ChangeNameActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 changeName();
-                                Intent intent = new Intent(ChangeNameActivity.this, ProfileActivity.class);
-                                startActivity(intent);
-                                finish();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
@@ -146,6 +143,9 @@ public class ChangeNameActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ChangeNameActivity.this, "User name updated successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ChangeNameActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     String errorMessage = "";
                     try {

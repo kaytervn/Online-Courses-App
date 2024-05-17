@@ -75,7 +75,7 @@
         android:layout_below="@id/inputPassword"
         android:layout_alignStart="@id/p1"
         android:layout_marginTop="20dp"
-        android:drawableStart="@drawable/password_icon"
+        android:drawableStart="@drawable/confirm_icon"
         android:drawablePadding="10dp"
         android:ems="11"
         android:hint="Confirm Password"
