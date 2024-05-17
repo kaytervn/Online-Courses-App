@@ -14,7 +14,8 @@ import retrofit2.http.Path;
 public interface APIService {
     @GET("invoices/my_course")
     Call<MyCourse> getMyCourses(@Header("Authorization") String token);
-
-    @POST("create_review/{courseId}")
-    Call<ResponseBody> createReview(@Header("Authorization") String token, @Path("courseId") String courseId, @Body ReviewData reviewData);
+    @GET("reviews/get-my-review-for-course/{courseId}")
+    Call<ResponseBody> getMyReviewForCourse(@Header("Authorization") String token, @Path("courseId") String courseId);
+    @POST("reviews/create_review/{courseId}")
+    Call<ResponseBody> createReview(@Header("Authorization") String token, @Path("courseId") String temp,@Body String courseId, @Body ReviewData reviewData);
 }
