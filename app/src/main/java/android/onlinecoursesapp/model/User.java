@@ -85,7 +85,7 @@ public class User {
         this.password = password;
     }
 
-    public class ChangePassword {
+    public static class ChangePassword {
         @SerializedName("password")
         String password;
 
