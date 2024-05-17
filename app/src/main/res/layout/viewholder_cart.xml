@@ -10,21 +10,8 @@
     android:layout_marginBottom="10dp"
     android:background="@drawable/card_background">
 
-    <TextView
-        android:id="@+id/priceCourseTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0$"
-        android:textColor="#373b54"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/titleCourseTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/titleCourseTxt"
-        tools:layout_marginEnd="16dp" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageCourseCart"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="4dp"
@@ -33,30 +20,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/titleCourseTxt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Title"
-        android:textColor="#373b54"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageCourseCart"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleCourseCartTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Title"
+            android:textColor="#373b54"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priceCourseTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+
+            android:text="0$"
+            android:textColor="#373b54"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4sp"
         android:background="@drawable/yellow_btn_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/titleCourseTxt">
+        app:layout_constraintStart_toEndOf="@+id/imageCourseCart"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/btnRemoveFromCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remove"

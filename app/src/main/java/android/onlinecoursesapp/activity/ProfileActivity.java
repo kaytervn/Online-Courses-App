@@ -56,6 +56,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
         textLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

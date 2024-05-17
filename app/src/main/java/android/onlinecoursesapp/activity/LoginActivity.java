@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     Button buttonLogin;
 
     APIService apiService;
-    String token;
+    String token, cartId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         String token = jsonObject.get("token").getAsString();
                         String cartId = jsonObject.get("cartId").getAsString();
                         SessionManager.getInstance(LoginActivity.this).saveLoginUser(token, cartId);
+                        Log.d("infor", token + " va : " + cartId);
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                     } catch (IOException e) {
@@ -112,5 +113,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin = findViewById(R.id.buttonLogin);
         textRegister = findViewById(R.id.textRegister);
         token = SessionManager.getInstance(LoginActivity.this).getKeyToken();
+        cartId = SessionManager.getInstance(LoginActivity.this).getKeyCartId();
+
     }
 }
