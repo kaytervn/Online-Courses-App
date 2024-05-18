@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.onlinecoursesapp.R;
+import android.onlinecoursesapp.activity.CourseDetailActivity;
 import android.onlinecoursesapp.activity.ReviewCourseActivity;
 import android.onlinecoursesapp.model.Course;
 import android.view.LayoutInflater;
@@ -79,8 +80,9 @@ public class MyCourseAdapter extends RecyclerView.Adapter<MyCourseAdapter.MyView
                         ((Activity) context).finish();
                     }
                     // chuyển sang chi tiết khóa học
-                    //Intent intent = new Intent(context, ____.class);
-                    //context.startActivity(intent);
+                    Intent intent = new Intent(context, CourseDetailActivity.class);
+                    intent.putExtra("course_id", course.getId());
+                    context.startActivity(intent);
                     //Toast.makeText(context, "Bạn đã chọn ____", Toast.LENGTH_SHORT).show();
                 }
             });

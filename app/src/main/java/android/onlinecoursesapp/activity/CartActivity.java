@@ -74,6 +74,14 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CartActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
     private void getCart() {
