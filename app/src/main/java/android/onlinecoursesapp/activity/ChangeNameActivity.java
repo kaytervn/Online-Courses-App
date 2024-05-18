@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -69,6 +70,22 @@ public class ChangeNameActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChangeNameActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ChangeNameActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ChangeNameActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
 
