@@ -2,6 +2,8 @@ package android.onlinecoursesapp.utils;
 
 import android.onlinecoursesapp.model.CartItem;
 import android.onlinecoursesapp.model.Course;
+import android.onlinecoursesapp.model.Document;
+import android.onlinecoursesapp.model.Lesson;
 import android.onlinecoursesapp.model.User;
 
 import okhttp3.MultipartBody;
@@ -38,6 +40,12 @@ public interface APIService {
 
     @GET("courses/get_course/{id}")
     Call<ResponseBody> getCourseIntro(@Path("id") String id);
+    @GET("invoices/my_course")
+    Call<ResponseBody> getMyCourses(@Header("Authorization") String authorization);
+    @POST("lessons/get-course-lessons")
+    Call<ResponseBody> getCourseLessons(@Body Lesson lesson);
+    @POST("documents/get-lesson-documents")
+    Call<ResponseBody> getLessonDocuments(@Body Document document);
     @POST("courses/search-courses")
     Call<ResponseBody> searchCourses(@Body Course.SearchCourses searchCourses);
     @GET("courses/get_course/{id}")
