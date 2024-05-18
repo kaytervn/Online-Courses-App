@@ -25,6 +25,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.LessonDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CourseDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CourseDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CourseDetailsAcitivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CourseIntroActivity"
             android:exported="false" />
         <activity
