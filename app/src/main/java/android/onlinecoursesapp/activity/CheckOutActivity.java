@@ -96,7 +96,7 @@ public class CheckOutActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(responseString);
                         String message = jsonObject.getString("message"); // Lấy thông điệp từ JSON
                         Toast.makeText(CheckOutActivity.this, message, Toast.LENGTH_LONG).show();
-                        navigateToHome();
+                        navigateToMyCourse();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -151,8 +151,8 @@ public class CheckOutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void navigateToHome() {
-        Intent homeIntent = new Intent(CheckOutActivity.this, HomeActivity.class);
+    private void navigateToMyCourse() {
+        Intent homeIntent = new Intent(CheckOutActivity.this, MyCourseActivity.class);
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Clear the activity stack
         startActivity(homeIntent);
         finish(); // End this activity

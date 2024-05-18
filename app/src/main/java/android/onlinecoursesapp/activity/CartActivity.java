@@ -51,7 +51,7 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        findViewById(R.id.loadingPanel1).setVisibility(View.VISIBLE);
         mapping();
         setEvent();
         getCart();
@@ -117,6 +117,7 @@ public class CartActivity extends AppCompatActivity {
                 } else {
                     Log.e("CartActivity", "Failed to load cart items");
                 }
+                findViewById(R.id.loadingPanel1).setVisibility(View.GONE);
             }
 
             @Override

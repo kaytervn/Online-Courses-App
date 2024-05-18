@@ -7,7 +7,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.CartActivity">
-
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingStart="16dp"
+        android:text="My Cart"
+        android:textAlignment="center"
+        android:textColor="#ff3d00"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -20,17 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="16dp"
-                android:text="My Cart"
-                android:textAlignment="center"
-                android:textColor="#ff3d00"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/emptyCartTextView"
                 android:layout_width="match_parent"
@@ -42,6 +42,7 @@
                 android:textColor="#ff3d00"
                 android:textSize="18sp"
                 android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -49,6 +50,24 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <include
+        android:id="@+id/loadingPanel1"
+        layout="@layout/course_loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_marginBottom="150sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:layout_constraintVertical_bias="0.302"/>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
