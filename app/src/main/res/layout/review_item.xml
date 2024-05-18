@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
+    android:layout_margin="15dp"
     android:background="@drawable/bg_review_item">
 
     <TextView

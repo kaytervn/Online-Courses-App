@@ -47,7 +47,8 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         holder.vvDocumentMedia.setMediaController(mediaController);
 
         holder.vvDocumentMedia.setVideoURI(Uri.parse(mediaUrl));
-        holder.vvDocumentMedia.seekTo(1);
+        holder.vvDocumentMedia.requestFocus();
+        holder.vvDocumentMedia.setOnPreparedListener(mp -> holder.vvDocumentMedia.start());
 
         holder.vvDocumentMedia.setOnClickListener(v -> {
             if (!holder.vvDocumentMedia.isPlaying()) {
