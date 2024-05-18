@@ -68,6 +68,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 finish();
             }
         });
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ChangePasswordActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ChangePasswordActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
         textCancel.setOnClickListener(new View.OnClickListener() {
             @Override
