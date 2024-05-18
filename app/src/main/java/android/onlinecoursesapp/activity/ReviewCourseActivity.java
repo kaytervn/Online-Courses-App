@@ -3,6 +3,8 @@ package android.onlinecoursesapp.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -14,6 +16,7 @@ import android.onlinecoursesapp.model.ReviewData;
 import android.onlinecoursesapp.model.ReviewResult;
 import android.onlinecoursesapp.utils.APIService;
 import android.onlinecoursesapp.utils.RetrofitClient;
+import android.onlinecoursesapp.utils.SessionManager;
 import android.os.Bundle;
 import android.onlinecoursesapp.R;
 import android.util.Log;
@@ -123,10 +126,22 @@ public class ReviewCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 review = new Review((int)starReview.getRating(), contentReview.getText().toString());
-                sendReview();
-                finish();
-                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReviewCourseActivity.this);
+                builder.setTitle("Remind").setMessage("Submitting a review will not be able to change the review, are you sure to submit?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                sendReview();
+                                Toast.makeText(getApplicationContext(), "Review sent successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        }).show();
             }
         });
     }
@@ -137,13 +152,14 @@ public class ReviewCourseActivity extends AppCompatActivity {
             public void onResponse(Call<ReviewResult> call, Response<ReviewResult> response) {
                 if(response.isSuccessful()){
                     ReviewResult result = response.body();
-                    Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("log", String.valueOf(result.getMessage()));
+                    //Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
                 }else{
                     String errorMessage = "";
                     try {
                         JsonObject errorJson = new Gson().fromJson(response.errorBody().string(), JsonObject.class);
                         errorMessage = errorJson.get("message").getAsString();
-                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        Log.d("log", String.valueOf(errorMessage));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -157,6 +173,7 @@ public class ReviewCourseActivity extends AppCompatActivity {
                 Log.d("logg", t.getMessage());
             }
         });
+
     }
     private void mapping(){
         tvCourseName = (TextView) findViewById(R.id.txtCourseName);
