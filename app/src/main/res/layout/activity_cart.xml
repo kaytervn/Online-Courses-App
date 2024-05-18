@@ -9,14 +9,6 @@
     tools:context=".activity.CartActivity">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        app:title="My Cart"
-        app:titleTextColor="@android:color/white" />
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -32,7 +24,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:paddingStart="16dp"
                 android:text="My Cart"
                 android:textAlignment="center"
