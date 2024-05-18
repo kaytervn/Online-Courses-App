@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".activity.MyCourseActivity">
 
+    <ImageView
+        android:id="@+id/imgheader"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/top_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </ImageView>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -13,36 +24,55 @@
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-black"
         android:text="MY COURSES"
-        android:textColor="#1C03FF"
-        android:textSize="34sp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.658"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
         android:layout_width="183dp"
         android:layout_height="135dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearanceOverlay="@style/square"
         app:srcCompat="@drawable/course_img" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_course"
-        android:layout_width="412dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="610dp"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imgheader"
         app:layout_constraintVertical_bias="0.0" />
+
+    <include
+        android:id="@+id/loadingPanel"
+        layout="@layout/course_loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_my_course"
+        app:layout_constraintVertical_bias="0.302">
+    </include>
 
     <include
         android:id="@+id/include"

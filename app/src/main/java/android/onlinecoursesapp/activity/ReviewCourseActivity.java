@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.onlinecoursesapp.adapter.MyCourseAdapter;
 import android.onlinecoursesapp.model.Course;
 import android.onlinecoursesapp.model.MyCourse;
@@ -100,6 +102,15 @@ public class ReviewCourseActivity extends AppCompatActivity {
         });
     }
     private void setEvent(){
+        buttonMyCourses.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E91E63")));
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(ReviewCourseActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

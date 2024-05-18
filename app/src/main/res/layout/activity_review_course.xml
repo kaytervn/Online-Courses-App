@@ -5,7 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ReviewCourseActivity">
-
+    <ImageView
+        android:id="@+id/imgheader"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/top_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </ImageView>
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagePic"
         android:layout_width="298dp"
@@ -29,7 +38,7 @@
         android:gravity="center"
         android:text="COURSE NAME"
         android:textAlignment="center"
-        android:textColor="#1C03FF"
+        android:textColor="#FFEB3B"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
