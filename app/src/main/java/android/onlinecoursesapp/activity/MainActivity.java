@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button buttonIntro = findViewById(R.id.buttonIntro);
         Button btnCoursesDetail = findViewById(R.id.btnCourseDetailsInMyCourses);
+        Button btn_MyCourse = (Button) findViewById(R.id.btn_MyCourse);
         buttonIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +32,14 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-
+        btn_MyCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(MainActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

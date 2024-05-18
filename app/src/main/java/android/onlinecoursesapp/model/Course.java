@@ -2,11 +2,12 @@ package android.onlinecoursesapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Course {
+public class Course implements Serializable {
     @SerializedName("_id")
-    String id;
+    private String id;
 
     @SerializedName("instructorName")
     String instructorName;

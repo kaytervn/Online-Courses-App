@@ -1,4 +1,8 @@
 package android.onlinecoursesapp.utils;
+import android.onlinecoursesapp.model.MyCourse;
+import android.onlinecoursesapp.model.Review;
+import android.onlinecoursesapp.model.ReviewData;
+import android.onlinecoursesapp.model.ReviewResult;
 
 import android.onlinecoursesapp.model.CartItem;
 import android.onlinecoursesapp.model.CheckoutRequest;
@@ -41,8 +45,6 @@ public interface APIService {
 
     @GET("courses/get_course/{id}")
     Call<ResponseBody> getCourseIntro(@Path("id") String id);
-    @GET("invoices/my_course")
-    Call<ResponseBody> getMyCourses(@Header("Authorization") String authorization);
     @POST("lessons/get-course-lessons")
     Call<ResponseBody> getCourseLessons(@Body Lesson lesson);
     @POST("documents/get-lesson-documents")
@@ -60,6 +62,17 @@ public interface APIService {
     @Multipart
     @PUT("users/update-profile-picture")
     Call<ResponseBody> updateUserProfilePicture(@Header("Authorization") String token, @Part MultipartBody.Part image);
+
+    @GET("invoices/my_course")
+    Call<MyCourse> getMyCourses(@Header("Authorization") String token);
+    @GET("invoices/my_course")
+    Call<ResponseBody> getMyCourses_rep_bo(@Header("Authorization") String token);
+
+    @GET("reviews/get-my-review-for-course/{courseId}")
+    Call<Review> getMyReviewForCourse(@Header("Authorization") String token, @Path("courseId") String courseId);
+
+    @POST("reviews/create_review/{courseId}")
+    Call<ReviewResult> createReview(@Header("Authorization") String token, @Path("courseId") String temp, @Body ReviewData reviewData);
 
     @POST("invoices/checkout")
     Call<ResponseBody> performCheckout(@Header("Authorization") String authToken, @Body CheckoutRequest checkoutRequest);
