@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.SerializedName;
 
 public class CartItem {
-    @SerializedName("id")
+    @SerializedName("_id")
     String id;
 
     @SerializedName("cartId")
@@ -20,7 +20,10 @@ public class CartItem {
         this.cartId = cartId;
         this.courseId = courseId;
     }
-
+    public CartItem(String cartId, String courseId) {
+        this.cartId = cartId;
+        this.courseId = courseId;
+    }
     public String getId() {
         return id;
     }

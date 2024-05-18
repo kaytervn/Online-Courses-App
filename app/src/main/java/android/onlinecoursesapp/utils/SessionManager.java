@@ -25,7 +25,7 @@ public class SessionManager {
 
     public void saveLoginUser(String token, String cardId) {
         editor.putString(KEY_TOKEN, token);
-        editor.remove(KEY_CART_ID);
+        editor.putString(KEY_CART_ID, cardId);
         editor.apply();
     }
 

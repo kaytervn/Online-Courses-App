@@ -11,7 +11,7 @@
     android:background="@drawable/card_background">
 
     <ImageView
-        android:id="@+id/imageCourseCart"
+        android:id="@+id/imageCourseCheckout"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="4dp"
@@ -27,11 +27,11 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageCourseCart"
+        app:layout_constraintStart_toEndOf="@+id/imageCourseCheckout"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/titleCourseCartTxt"
+            android:id="@+id/titleCourseCheckoutTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -44,7 +44,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/priceCourseTxt"
+            android:id="@+id/priceCourseCheckoutTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -57,28 +57,5 @@
             android:textStyle="normal" />
 
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4sp"
-        android:background="@drawable/yellow_btn_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageCourseCart"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <TextView
-            android:id="@+id/btnRemoveFromCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remove"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

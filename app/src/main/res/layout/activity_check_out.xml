@@ -6,17 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.CartActivity">
-
+    tools:context=".activity.CheckOutActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarcheckout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        app:title="My Cart"
+        app:title="CheckOut"
         app:titleTextColor="@android:color/white" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -29,27 +29,29 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
-                android:text="My Cart"
+                android:text="Order Details"
                 android:textAlignment="center"
                 android:textColor="#ff3d00"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/emptyCartTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
-                android:text="There are no courses in the cart"
+                android:text="Không có sản phẩm nào trong giỏ hàng"
                 android:textAlignment="center"
                 android:textColor="#ff3d00"
                 android:textSize="18sp"
                 android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -57,12 +59,88 @@
 
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/card_background"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/textViewPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:text="Payment Method"
+            android:textAlignment="center"
+            android:textColor="#373b54"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <RadioGroup
+            android:id="@+id/paymentMethodRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|center_horizontal">
+
+                <RadioButton
+                    android:id="@+id/momoRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text=""
+                    android:drawablePadding="8dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/momo_logo"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Momo"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_marginStart="16dp">
+
+                <RadioButton
+                    android:id="@+id/paypalRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text=""
+                    android:drawablePadding="8dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/paypal_logo"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Paypal"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </RadioGroup>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +162,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/totalCartTxt"
+                android:id="@+id/totalPaymentTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0$"
@@ -102,10 +180,10 @@
         android:background="@drawable/yellow_btn_background">
 
         <TextView
-            android:id="@+id/checkoutCartTxt"
+            android:id="@+id/completePaymentTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckOut"
+            android:text="Complete payment"
             android:textColor="#ffffff"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -115,9 +193,4 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <include
-        layout="@layout/footer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.onlinecoursesapp.adapter.CoursesAdapter;
+import android.onlinecoursesapp.model.CartItem;
 import android.onlinecoursesapp.model.Course;
 import android.onlinecoursesapp.utils.APIService;
 import android.onlinecoursesapp.utils.RetrofitClient;
@@ -84,13 +85,50 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onViewIntroClick(Course course) {
-
+                Log.d("addtocart", "view intro");
+                Intent intent = new Intent(HomeActivity.this, CourseIntroActivity.class);
+                intent.putExtra("course_id", course.getId());
+                startActivity(intent);
+                finish();
             }
 
             @Override
             public void onAddToCartClick(Course course) {
+                String cartId = SessionManager.getInstance(HomeActivity.this).getKeyCartId();
+                String token = SessionManager.getInstance(HomeActivity.this).getKeyToken();
+                CartItem cartItemRequest = new CartItem(cartId, course.getId());
 
+                apiService.addToCart("Bearer " + token, cartItemRequest).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(HomeActivity.this, "Course added to cart successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Handle error response
+                            String errorMessage = "Failed to add course to cart"; // Default error message
+                            if (response.errorBody() != null) {
+                                try {
+                                    // Try to parse the error body to get detailed error message
+                                    String errorBody = response.errorBody().string();
+                                    JSONObject errorObject = new JSONObject(errorBody);
+                                    if (errorObject.has("error")) {
+                                        errorMessage = errorObject.getString("error");
+                                    }
+                                } catch (IOException | JSONException e) {
+                                    e.printStackTrace(); // Log the exception
+                                }
+                            }
+                            Toast.makeText(HomeActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(HomeActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+
         });
         coursesAdapter.setData(courses);
         recyclerViewCourses.setHasFixedSize(false);
@@ -201,6 +239,13 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(HomeActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });
