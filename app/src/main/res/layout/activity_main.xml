@@ -14,7 +14,9 @@
         android:layout_alignParentEnd="true"
         android:text="Intro"
         tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="144dp"></Button>
+        tools:layout_editor_absoluteY="144dp">
+
+    </Button>
 
     <Button
         android:id="@+id/btnCourseDetailsInMyCourses"
@@ -25,6 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btn_MyCourse"
         android:layout_width="195dp"
@@ -44,6 +47,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.449" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
 
 

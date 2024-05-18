@@ -45,8 +45,6 @@ public interface APIService {
 
     @GET("courses/get_course/{id}")
     Call<ResponseBody> getCourseIntro(@Path("id") String id);
-    @GET("invoices/my_course")
-    Call<ResponseBody> getMyCourses(@Header("Authorization") String authorization);
     @POST("lessons/get-course-lessons")
     Call<ResponseBody> getCourseLessons(@Body Lesson lesson);
     @POST("documents/get-lesson-documents")
@@ -67,6 +65,8 @@ public interface APIService {
 
     @GET("invoices/my_course")
     Call<MyCourse> getMyCourses(@Header("Authorization") String token);
+    @GET("invoices/my_course")
+    Call<ResponseBody> getMyCourses_rep_bo(@Header("Authorization") String token);
 
     @GET("reviews/get-my-review-for-course/{courseId}")
     Call<Review> getMyReviewForCourse(@Header("Authorization") String token, @Path("courseId") String courseId);

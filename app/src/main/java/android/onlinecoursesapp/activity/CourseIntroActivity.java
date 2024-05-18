@@ -176,7 +176,7 @@ public class CourseIntroActivity extends AppCompatActivity {
     private void getMyCoursesAndCourseDetails() {
         apiService = RetrofitClient.getAPIService();
         String token = "Bearer " + SessionManager.getInstance(this).getKeyToken();
-        Call<ResponseBody> call = apiService.getMyCourses(token);
+        Call<ResponseBody> call = apiService.getMyCourses_rep_bo(token);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
