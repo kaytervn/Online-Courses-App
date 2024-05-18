@@ -8,11 +8,15 @@ import android.content.Intent;
 
 import android.onlinecoursesapp.R;
 import android.onlinecoursesapp.adapter.ReviewsAdapter;
+import android.onlinecoursesapp.model.CartItem;
 import android.onlinecoursesapp.model.CourseIntro;
 import android.onlinecoursesapp.utils.APIService;
 import android.onlinecoursesapp.utils.RetrofitClient;
 import android.onlinecoursesapp.utils.SessionManager;
 import android.os.Bundle;
+
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +50,7 @@ public class CourseIntroActivity extends AppCompatActivity {
     private Button btnAddToCart;
     private String courseId;
     private Set<String> purchasedCourseIds = new HashSet<>();
+    private Button buttonAddToCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +70,21 @@ public class CourseIntroActivity extends AppCompatActivity {
         courseId = getIntent().getStringExtra("course_id");
 
         getMyCoursesAndCourseDetails();
+      
+        buttonAddToCart = findViewById(R.id.buttonAddToCart);
+        courseId = getIntent().getStringExtra("course_id");
+        Log.d("addtocart2", "courseid"+ courseId);
+        getCourseDetails(courseId);
+        setupAddToCartButton();
     }
-
+    private void setupAddToCartButton() {
+        buttonAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCart();
+            }
+        });
+    }
     private void getCourseDetails(String courseId) {
         apiService = RetrofitClient.getAPIService();
         Call<ResponseBody> call = apiService.getCourseIntro(courseId);
@@ -116,6 +134,41 @@ public class CourseIntroActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 textDescription.setText("Error: " + t.getMessage());
                 t.printStackTrace();
+            }
+        });
+    }
+    private void addToCart() {
+        String cartId = SessionManager.getInstance(CourseIntroActivity.this).getKeyCartId();
+        String token = SessionManager.getInstance(CourseIntroActivity.this).getKeyToken();
+        apiService = RetrofitClient.getAPIService();
+        apiService.addToCart("Bearer " + token, new CartItem(cartId, courseId)).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(CourseIntroActivity.this, "Course added to cart successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Handle error response
+                    String errorMessage = "Failed to add course to cart"; // Default error message
+                    if (response.errorBody() != null) {
+                        try {
+                            // Try to parse the error body to get detailed error message
+                            String errorBody = response.errorBody().string();
+                            JSONObject errorObject = new JSONObject(errorBody);
+                            if (errorObject.has("error")) {
+                                errorMessage = errorObject.getString("error");
+                            }
+                        } catch (IOException | JSONException e) {
+                            e.printStackTrace(); // Log the exception
+                            errorMessage = "Failed to parse error message"; // Fallback error message
+                        }
+                    }
+                    Toast.makeText(CourseIntroActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(CourseIntroActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

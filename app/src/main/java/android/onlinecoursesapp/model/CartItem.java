@@ -20,7 +20,10 @@ public class CartItem {
         this.cartId = cartId;
         this.courseId = courseId;
     }
-
+    public CartItem(String cartId, String courseId) {
+        this.cartId = cartId;
+        this.courseId = courseId;
+    }
     public String getId() {
         return id;
     }

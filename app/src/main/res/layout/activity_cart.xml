@@ -35,7 +35,7 @@
                 android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
                 android:text="My Cart"
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 android:textColor="#ff3d00"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
-                android:text="Không có sản phẩm nào trong giỏ hàng"
+                android:text="There are no courses in the cart"
                 android:textAlignment="center"
                 android:textColor="#ff3d00"
                 android:textSize="18sp"
@@ -102,7 +102,7 @@
         android:background="@drawable/yellow_btn_background">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/checkoutCartTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CheckOut"

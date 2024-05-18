@@ -1,6 +1,7 @@
 package android.onlinecoursesapp.utils;
 
 import android.onlinecoursesapp.model.CartItem;
+import android.onlinecoursesapp.model.CheckoutRequest;
 import android.onlinecoursesapp.model.Course;
 import android.onlinecoursesapp.model.Document;
 import android.onlinecoursesapp.model.Lesson;
@@ -54,9 +55,12 @@ public interface APIService {
     Call<ResponseBody> removeFromCart(@Path("cartId") String cartId, @Path("courseId") String courseId);
 
     @POST("carts/addToCart")
-    Call<ResponseBody> addToCart(@Body CartItem cartItemRequest);
+    Call<ResponseBody> addToCart(@Header("Authorization") String authorization, @Body CartItem cartItemRequest);
 
     @Multipart
     @PUT("users/update-profile-picture")
     Call<ResponseBody> updateUserProfilePicture(@Header("Authorization") String token, @Part MultipartBody.Part image);
+
+    @POST("invoices/checkout")
+    Call<ResponseBody> performCheckout(@Header("Authorization") String authToken, @Body CheckoutRequest checkoutRequest);
 }
