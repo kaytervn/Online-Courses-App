@@ -3,23 +3,23 @@ package android.onlinecoursesapp.model;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    @SerializedName("id")
-    String id;
+    @SerializedName("_id")
+    private String id;
 
     @SerializedName("picture")
-    String picture;
+    private String picture;
 
     @SerializedName("name")
-    String name;
+    private String name;
 
     @SerializedName("email")
-    String email;
+    private String email;
 
     @SerializedName("password")
-    String password;
+    private String password;
 
     @SerializedName("confirmPassword")
-    String confirmPassword;
+    private String confirmPassword;
 
     public User(String id, String picture, String name, String email, String password) {
         this.id = id;
