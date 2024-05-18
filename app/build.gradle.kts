@@ -6,10 +6,6 @@ android {
     namespace = "android.onlinecoursesapp"
     compileSdk = 34
 
-    buildFeatures {
-        viewBinding = true
-    }
-
     defaultConfig {
         applicationId = "android.onlinecoursesapp"
         minSdk = 21
@@ -36,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.github.smarteist:autoimageslider:1.4.0")
     implementation("androidx.room:room-runtime:2.5.1")
     annotationProcessor("androidx.room:room-compiler:2.5.1")

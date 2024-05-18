@@ -6,7 +6,15 @@
     </style>
 
     <style name="square">
-        <item name="cornerSize">15%</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="car_border">
+        <item name="cornerSize">5%</item>
+    </style>
+
+    <style name="SpinnerTextStyle" parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:paddingStart">25dp</item>
     </style>
 
 </resources>

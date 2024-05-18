@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 
 public class SessionManager {
     private static final String PREF_NAME = "LoginPreference";
-    private static final String KEY_ID = "id";
+    private static final String KEY_TOKEN = "token";
+    private static final String KEY_CART_ID = "cartId";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private static SessionManager instance;
@@ -22,17 +23,23 @@ public class SessionManager {
         return instance;
     }
 
-    public void saveLoginUser(String id) {
-        editor.putString(KEY_ID, id);
+    public void saveLoginUser(String token, String cardId) {
+        editor.putString(KEY_TOKEN, token);
+        editor.putString(KEY_CART_ID, cardId);
         editor.apply();
     }
 
-    public String getId() {
-        return sharedPreferences.getString(KEY_ID, "");
+    public String getKeyToken() {
+        return sharedPreferences.getString(KEY_TOKEN, "");
+    }
+
+    public String getKeyCartId() {
+        return sharedPreferences.getString(KEY_CART_ID, "");
     }
 
     public void clearLoginUser() {
-        editor.remove(KEY_ID);
+        editor.remove(KEY_TOKEN);
+        editor.remove(KEY_CART_ID);
         editor.apply();
     }
 }
