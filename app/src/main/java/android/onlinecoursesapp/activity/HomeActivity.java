@@ -69,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerViewCourses;
     CoursesAdapter coursesAdapter;
     Handler handler;
+    TextView textMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, CourseIntroActivity.class);
                 intent.putExtra("course_id", course.getId());
                 startActivity(intent);
-                finish();
+
             }
 
             @Override
@@ -217,7 +218,11 @@ public class HomeActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     if (courses.size() == 0) {
+                        textMessage.setVisibility(View.VISIBLE);
                         Toast.makeText(HomeActivity.this, "Course Not Found.", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        textMessage.setVisibility(View.GONE);
                     }
                     coursesAdapter.setData(courses);
                 } else {
@@ -233,6 +238,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
+        textMessage.setVisibility(View.GONE);
         buttonHome.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E91E63")));
         buttonMyCourses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,6 +251,7 @@ public class HomeActivity extends AppCompatActivity {
         buttonCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent intent = new Intent(HomeActivity.this, CartActivity.class);
                 startActivity(intent);
             }
@@ -370,6 +377,7 @@ public class HomeActivity extends AppCompatActivity {
         selectSort = findViewById(R.id.selectSort);
         selectTopic = findViewById(R.id.selectTopic);
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
+        textMessage = findViewById(R.id.textMessage);
         handler = new Handler();
     }
 }

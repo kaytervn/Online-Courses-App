@@ -1,11 +1,14 @@
 package android.onlinecoursesapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.onlinecoursesapp.R;
 import android.onlinecoursesapp.adapter.ReviewsAdapter;
 import android.onlinecoursesapp.model.CartItem;
@@ -43,6 +46,8 @@ import retrofit2.Response;
 public class CourseIntroActivity extends AppCompatActivity {
 
     private TextView textTitle, textDescription, textPrice, textInstructorName, textTopic, textAverageStar;
+    Button buttonHome, buttonMyCourses, buttonCart, buttonProfile;
+
     private ImageView imagePicture;
     private RecyclerView recyclerViewReviews;
     private ReviewsAdapter reviewsAdapter;
@@ -57,6 +62,12 @@ public class CourseIntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_intro);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         textTitle = findViewById(R.id.tvTitleCourse);
         textDescription = findViewById(R.id.tvDescriptionCourse);
         textPrice = findViewById(R.id.tvPriceCourse);
@@ -68,14 +79,57 @@ public class CourseIntroActivity extends AppCompatActivity {
         btnAddToCart = findViewById(R.id.buttonAddToCart);
 
         courseId = getIntent().getStringExtra("course_id");
-
+        mapping();
+        setEvent();
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         getMyCoursesAndCourseDetails();
-      
+
         buttonAddToCart = findViewById(R.id.buttonAddToCart);
         courseId = getIntent().getStringExtra("course_id");
-        Log.d("addtocart2", "courseid"+ courseId);
-        getCourseDetails(courseId);
+
         setupAddToCartButton();
+    }
+
+    private void setEvent(){
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CourseIntroActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CourseIntroActivity.this, MyCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CourseIntroActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CourseIntroActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void mapping(){
+        buttonHome = findViewById(R.id.buttonHome);
+        buttonMyCourses = findViewById(R.id.buttonMyCourses);
+        buttonCart = findViewById(R.id.buttonCart);
+        buttonProfile = findViewById(R.id.buttonProfile);
     }
     private void setupAddToCartButton() {
         buttonAddToCart.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +182,7 @@ public class CourseIntroActivity extends AppCompatActivity {
                 } else {
                     textDescription.setText("Error: Response not successful");
                 }
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
             @Override
@@ -148,18 +203,17 @@ public class CourseIntroActivity extends AppCompatActivity {
                     Toast.makeText(CourseIntroActivity.this, "Course added to cart successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     // Handle error response
-                    String errorMessage = "Failed to add course to cart"; // Default error message
+                    String errorMessage = "Failed to add course to cart";
                     if (response.errorBody() != null) {
                         try {
-                            // Try to parse the error body to get detailed error message
                             String errorBody = response.errorBody().string();
                             JSONObject errorObject = new JSONObject(errorBody);
                             if (errorObject.has("error")) {
                                 errorMessage = errorObject.getString("error");
                             }
                         } catch (IOException | JSONException e) {
-                            e.printStackTrace(); // Log the exception
-                            errorMessage = "Failed to parse error message"; // Fallback error message
+                            e.printStackTrace();
+                            errorMessage = "Failed to parse error message";
                         }
                     }
                     Toast.makeText(CourseIntroActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
@@ -200,6 +254,7 @@ public class CourseIntroActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(CourseIntroActivity.this, "Error: Response not successful", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
@@ -223,12 +278,16 @@ public class CourseIntroActivity extends AppCompatActivity {
                 Intent intent = new Intent(CourseIntroActivity.this, CourseDetailActivity.class);
                 intent.putExtra("course_id", courseId);
                 startActivity(intent);
-                finish();
             } else {
-                // Xử lý thêm vào giỏ hàng
-//                addToCart(courseId);
+                addToCart();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
 }
