@@ -96,7 +96,6 @@ public class MyCourseActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     MyCourse mycourse = response.body();
                     listCourse = mycourse.getCourses();
-                    Log.d("logg", listCourse.get(0).getTitle());
                     myCourseadapter = new MyCourseAdapter(MyCourseActivity.this, listCourse, token);
                     rc_my_course.setHasFixedSize(true);
                     rc_my_course.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
