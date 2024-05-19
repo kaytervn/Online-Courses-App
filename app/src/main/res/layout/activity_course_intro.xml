@@ -7,10 +7,21 @@
     android:background="@drawable/course_background_gradient"
     tools:context=".activity.CourseIntroActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/back"
+        app:title="Course Intro"
+        app:titleTextColor="@android:color/white" />
+
+
     <ScrollView
         android:id="@+id/scrollViewContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:layout_above="@+id/footer"
         android:padding="16dp">
 
@@ -79,6 +90,7 @@
                     android:textColor="#FF5722"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <ImageView
                     android:id="@+id/ivStar5"
                     android:layout_weight="0.2"

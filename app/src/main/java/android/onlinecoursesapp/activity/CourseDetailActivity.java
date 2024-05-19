@@ -1,6 +1,7 @@
 package android.onlinecoursesapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +51,11 @@ public class CourseDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         textTitle = findViewById(R.id.tvTitleCourse1);
         textDescription = findViewById(R.id.tvDescriptionCourse1);
@@ -60,6 +66,7 @@ public class CourseDetailActivity extends AppCompatActivity {
 
         recyclerViewLessons = findViewById(R.id.recyclerViewLessons);
         recyclerViewLessons.setLayoutManager(new LinearLayoutManager(this));
+
 
 
 
@@ -79,6 +86,14 @@ public class CourseDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(CourseDetailActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CourseDetailActivity.this, MyCourseActivity.class);
                 startActivity(intent);
             }
         });
@@ -202,5 +217,11 @@ public class CourseDetailActivity extends AppCompatActivity {
         recyclerViewLessons.setAdapter(lessonAdapter);
         tvNoLessons.setVisibility(View.GONE);
         recyclerViewLessons.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 }

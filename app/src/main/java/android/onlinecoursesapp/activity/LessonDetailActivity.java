@@ -1,6 +1,7 @@
 package android.onlinecoursesapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +50,12 @@ public class LessonDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_detail);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         textTitle = findViewById(R.id.tvTitleCourse2);
         textDescription = findViewById(R.id.tvDescriptionCourse2);
         textInstructorName = findViewById(R.id.tvInstructorNameCourse2);
@@ -75,6 +82,15 @@ public class LessonDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(LessonDetailActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(LessonDetailActivity.this, MyCourseActivity.class);
                 startActivity(intent);
             }
         });
@@ -195,5 +211,12 @@ public class LessonDetailActivity extends AppCompatActivity {
     private void showDocuments(List<Document> documentList) {
         documentsAdapter = new DocumentsAdapter(LessonDetailActivity.this, documentList);
         recyclerViewDocuments.setAdapter(documentsAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 }
