@@ -96,20 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/star_rating" />
-                <TextView
-                    android:id="@+id/tvNoLessons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No lessons available for this course."
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:background="@drawable/no_lessons_background"
-                    android:padding="16dp"
-                    android:drawableTop="@drawable/ic_no_lessons"
-                    android:drawablePadding="8dp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <TextView
@@ -128,6 +115,21 @@
                 android:text="Lessons"
                 android:textColor="#FFEB3B"
                 android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvNoLessons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No lessons available for this course."
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:background="@drawable/no_lessons_background"
+                android:padding="16dp"
+                android:drawableTop="@drawable/ic_no_lessons"
+                android:drawablePadding="8dp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
