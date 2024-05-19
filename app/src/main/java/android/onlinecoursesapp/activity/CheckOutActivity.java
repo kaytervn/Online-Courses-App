@@ -43,6 +43,7 @@ public class CheckOutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         paymentMethodRadioGroup = findViewById(R.id.paymentMethodRadioGroup);
         RadioButton momoRadioButton = findViewById(R.id.momoRadioButton);

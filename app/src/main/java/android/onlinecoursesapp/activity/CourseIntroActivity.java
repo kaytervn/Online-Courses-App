@@ -1,6 +1,7 @@
 package android.onlinecoursesapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +62,12 @@ public class CourseIntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_intro);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
         textTitle = findViewById(R.id.tvTitleCourse);
         textDescription = findViewById(R.id.tvDescriptionCourse);
         textPrice = findViewById(R.id.tvPriceCourse);
@@ -90,6 +97,15 @@ public class CourseIntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(CourseIntroActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonMyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(CourseIntroActivity.this, MyCourseActivity.class);
                 startActivity(intent);
             }
         });
@@ -263,12 +279,18 @@ public class CourseIntroActivity extends AppCompatActivity {
                 Intent intent = new Intent(CourseIntroActivity.this, CourseDetailActivity.class);
                 intent.putExtra("course_id", courseId);
                 startActivity(intent);
-                finish();
             } else {
                 // Xử lý thêm vào giỏ hàng
                 addToCart();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
 }
