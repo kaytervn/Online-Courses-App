@@ -77,9 +77,6 @@ public class MyCourseAdapter extends RecyclerView.Adapter<MyCourseAdapter.MyView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (context instanceof Activity) {
-                        ((Activity) context).finish();
-                    }
                     // chuyển sang chi tiết khóa học
                     Intent intent = new Intent(context, CourseIntroActivity.class);
                     intent.putExtra("course_id", course.getId());
