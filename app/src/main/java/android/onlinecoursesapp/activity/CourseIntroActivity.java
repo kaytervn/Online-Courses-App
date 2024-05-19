@@ -86,8 +86,7 @@ public class CourseIntroActivity extends AppCompatActivity {
 
         buttonAddToCart = findViewById(R.id.buttonAddToCart);
         courseId = getIntent().getStringExtra("course_id");
-        Log.d("addtocart2", "courseid"+ courseId);
-        getCourseDetails(courseId);
+
         setupAddToCartButton();
     }
 
@@ -280,7 +279,6 @@ public class CourseIntroActivity extends AppCompatActivity {
                 intent.putExtra("course_id", courseId);
                 startActivity(intent);
             } else {
-                // Xử lý thêm vào giỏ hàng
                 addToCart();
             }
         });
@@ -289,7 +287,6 @@ public class CourseIntroActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
